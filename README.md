@@ -7,7 +7,8 @@
 
 ## References and Resources
 
-N/A
+https://developer.android.com/develop/ui/views/layout/linear - For Layouts
+https://developer.android.com/develop/ui/views/components/button - For Buttons
 
 ## Verbal Collaboration
 
