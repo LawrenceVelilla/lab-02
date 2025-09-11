@@ -90,8 +90,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String city = cityToAdd.getText().toString();
-                dataList.add(0, city);
+                dataList.add(city); // Add to end of list
                 cityAdapter.notifyDataSetChanged();
+
+                cityToAdd.setVisibility(View.GONE);
+                confirmButton.setVisibility(View.GONE);
             }
         });
 
