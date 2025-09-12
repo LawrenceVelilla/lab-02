@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> cityAdapter;
     ArrayList<String> dataList;
 
-    Integer selectedCity = null;
+    Integer currentCityPosition = null;
+    View currentView = null;
 
 
     @Override
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         Button addButton = (Button) findViewById(R.id.add_button);
         Button deleteButton = (Button) findViewById(R.id.delete_city);
 
+        deleteButton.setEnabled(false);
+
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("Add Button Clicked");
@@ -70,19 +73,29 @@ public class MainActivity extends AppCompatActivity {
         cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedCity = position;
+                if (currentView != null) {
+                    currentView.setBackgroundColor(Color.TRANSPARENT);
+                }
+                currentCityPosition = position;
+                currentView = view;
                 view.setBackgroundColor(Color.LTGRAY);
-                deleteButton.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        System.out.println("Delete Button Pressed");
-                        dataList.remove(position);
-                        cityAdapter.notifyDataSetChanged();
-                        selectedCity = null;
-                        view.setBackgroundColor(Color.TRANSPARENT);
-                    }
-                });
+                deleteButton.setEnabled(true);
+            }
+        });
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (currentCityPosition != null && currentCityPosition >= 0) {
+                    System.out.println("Delete Button Pressed");
+                    dataList.remove((int) currentCityPosition);
+                    cityAdapter.notifyDataSetChanged();
 
+                    currentView.setBackgroundColor(Color.TRANSPARENT);
+
+                    currentCityPosition = null;
+                    currentView = null;
+                    deleteButton.setEnabled(false);
+                }
             }
         });
 
@@ -92,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 String city = cityToAdd.getText().toString();
                 dataList.add(city); // Add to end of list
                 cityAdapter.notifyDataSetChanged();
+
 
                 cityToAdd.setVisibility(View.GONE);
                 confirmButton.setVisibility(View.GONE);

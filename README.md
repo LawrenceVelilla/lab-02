@@ -12,7 +12,7 @@ https://developer.android.com/develop/ui/views/components/button - For Buttons
 https://developer.android.com/reference/android/view/View - View Visibility for hiding input field
 https://developer.android.com/reference/android/widget/EditText - Text Field for inputs
 https://www.geeksforgeeks.org/java/list-add-method-in-java-with-examples/ - Lists
-
+https://www.geeksforgeeks.org/android/how-to-enable-disable-button-in-android/ - enabling and disabling a button
 ## Verbal Collaboration
 
 | Student Name | CCID      |
